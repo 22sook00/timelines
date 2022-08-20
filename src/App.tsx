@@ -1,10 +1,10 @@
 import React from 'react';
-import Timeline from './components/Timeline/Timeline';
+import TimelineLayout from './components/Timelines/TimelineLayout';
 
 function App() {
   return (
     <main className="defaultLayout">
-      <Timeline />
+      <TimelineLayout />
     </main>
   );
 }
