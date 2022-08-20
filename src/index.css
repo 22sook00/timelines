@@ -1,13 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .defaultLayout {
+    @apply max-w-[1120px] p-10 m-auto 
+  }
+}
+
+@font-face {
+	font-family: "Comfortaa";
+	font-weight: 400;
+	src: local("Comfortaa") url('@src/../../public/font/Comfortaa-Regular.ttf')
+
+}
+@font-face {
+	font-family: "ComfortaaBold";
+	font-weight: 700;
+	src: local("ComfortaaBold") url("@src/../../public/font/Comfortaa-Bold.ttf")
+
+}
+@font-face {
+	font-family: "ComfortaaLight";
+	font-weight: 300;
+	src: local("ComfortaaLight") url("@src/../../public/font/Comfortaa-Light.ttf")
+
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Comfortaa','ComfortaaBold','ComfortaaLight',-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #515151;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
