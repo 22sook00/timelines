@@ -1,45 +1,52 @@
-import React from 'react';
-import Timeline from 'react-calendar-timeline';
+import React, { useCallback } from 'react';
+import Timeline, {
+  TimelineMarkers,
+  CustomMarker,
+  TodayMarker,
+  CursorMarker,
+  TimelineHeaders,
+  SidebarHeader,
+  DateHeader,
+} from 'react-calendar-timeline';
 import 'react-calendar-timeline/lib/Timeline.css';
 import moment from 'moment';
+import { cols, items } from './timelineData';
 const TimelineLayout = () => {
-  const groups = [
-    { id: 1, title: 'group 1' },
-    { id: 2, title: 'group 2' },
-  ];
+  const today = Date.now();
+  const tomorrow = new Date(today).getDate() + 1;
+  const twoSeconds = 2000;
+  const someCustomHandler = useCallback((data: any) => {
+    console.log('data?', data);
+  }, []);
 
-  const items = [
-    {
-      id: 1,
-      group: 1,
-      title: 'item 1',
-      start_time: moment(),
-      end_time: moment().add(1, 'hour'),
-    },
-    {
-      id: 2,
-      group: 2,
-      title: 'item 2',
-      start_time: moment().add(-0.5, 'hour'),
-      end_time: moment().add(0.5, 'hour'),
-    },
-    {
-      id: 3,
-      group: 1,
-      title: 'item 3',
-      start_time: moment().add(2, 'hour'),
-      end_time: moment().add(3, 'hour'),
-    },
-  ];
   return (
     <div>
       <h1 className=" text-3xl font-semibold">React-Time-line Tutorial</h1>
-      <Timeline
-        groups={groups}
-        items={items}
-        defaultTimeStart={moment().add(-12, 'hour')}
-        defaultTimeEnd={moment().add(12, 'hour')}
-      />
+      <section className="w-full  mt-10 border border-blue-400 rounded-lg">
+        <Timeline
+          groups={cols}
+          items={items}
+          defaultTimeStart={moment().add(-24, 'hour')}
+          defaultTimeEnd={moment().add(24, 'hour')}
+        >
+          <TimelineHeaders>
+            <SidebarHeader>
+              {({ getRootProps }) => {
+                return (
+                  <div
+                    {...getRootProps()}
+                    className="bg-primary-default text-white text-lg font-bold  flex justify-center items-center"
+                  >
+                    Type
+                  </div>
+                );
+              }}
+            </SidebarHeader>
+            <DateHeader unit="primaryHeader" />
+            <DateHeader />
+          </TimelineHeaders>
+        </Timeline>
+      </section>
     </div>
   );
 };
