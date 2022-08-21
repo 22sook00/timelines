@@ -1,17 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  important:true,
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
       colors:{
-        'primary-default' :'rgb(2 132 199)',
-        'secondary-default':'rgb(3 105 161)',
-        'primary-tint':' rgb(125 211 252)',
-        'text-default':'#515151',
+        'primary-default' :'#0ea5e9',
+        'secondary-default':'#0284c7',
+        'primary-tint':'#38bdf81a',
+        'text-default':'#334155',
+        'text-dark':'#0f172a',
         'text-light':'#818181',
         'text-tint':'#d1d1d1',
+        'dark-bg':'#1e293b',
+        'pink-filter':'#fdf2f8',
+        'pink-filter-text':'#db2777',
       },
       dropShadow: {
         '3xl': '0 35px 35px rgba(0, 0, 0, 0.25)',
@@ -22,8 +27,6 @@ module.exports = {
       },
       fontFamily: {
         'Comfortaa': 'Comfortaa-Regular', 
-        'ComfortaaBold':'Comfortaa-Bold',
-        'ComfortaaLight':'Comfortaa-Light'
       },
       animation: {
         'spin-slow': 'spin 5s ease infinite',

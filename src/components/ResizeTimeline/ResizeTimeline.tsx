@@ -1,5 +1,14 @@
 import React, { useCallback, useState } from 'react';
-import Timeline from 'react-calendar-timeline';
+import Timeline, {
+  TimelineMarkers,
+  CustomMarker,
+  TodayMarker,
+  CursorMarker,
+  TimelineHeaders,
+  SidebarHeader,
+  DateHeader,
+  CustomHeader,
+} from 'react-calendar-timeline';
 import 'react-calendar-timeline/lib/Timeline.css';
 import moment from 'moment';
 import { groupsArr, itemsArr, keys } from './generator';
@@ -9,6 +18,7 @@ const ResizeTimeline = () => {
   const defaultTimeStart = moment().add(-12, 'hour');
   const defaultTimeEnd = moment().add(12, 'hour');
 
+  const twoSeconds = 2000;
   const handleItemMove = (
     itemId: number,
     dragTime: number,
@@ -49,12 +59,13 @@ const ResizeTimeline = () => {
       const borderColor = itemContext.resizing
         ? 'rgb(125 211 252)'
         : item.bgColor;
+      //console.log('item.bgColor?', item.bgColor);
       return (
         <div
           {...getItemProps({
             style: {
               backgroundColor,
-              border: `2px dashed ${borderColor}`,
+              //border: `2px dashed ${borderColor}`,
               borderRadius: 8,
             },
             onMouseDown: () => {
@@ -67,7 +78,7 @@ const ResizeTimeline = () => {
           <div
             className={`text-text-default  h-[25px] overflow-hidden pl-1 text-ellipsis whitespace-nowrap`}
           >
-            {itemContext.title}f
+            {itemContext.title}
           </div>
 
           {itemContext.useResizeHandle && <div {...rightResizeProps} />}
@@ -76,17 +87,25 @@ const ResizeTimeline = () => {
     },
     [],
   );
-
+  const groupRenderer = ({ group }: any) => {
+    return (
+      <div className="w-full text-center">
+        <span className="  text-text-dark text-sm ">🏡 {group.title}</span>
+        <p className="tip">{group.tip}</p>
+      </div>
+    );
+  };
   return (
     <div>
-      <section className=" w-full  mt-10 border border-blue-400 rounded-lg">
+      <section className=" w-full  mt-10 border overflow-hidden drop-shadow-sm rounded-lg">
         <Timeline
           groups={groupsArr}
           items={value}
           keys={keys}
+          groupRenderer={groupRenderer}
           itemTouchSendsClick={false}
           stackItems
-          itemHeightRatio={0.75}
+          itemHeightRatio={0.85}
           canMove={true}
           canResize={'both'}
           defaultTimeStart={defaultTimeStart}
@@ -94,7 +113,44 @@ const ResizeTimeline = () => {
           onItemMove={handleItemMove}
           onItemResize={handleItemResize}
           itemRenderer={handleItemRenderer}
-        ></Timeline>
+          rightSidebarWidth={150}
+        >
+          <TimelineMarkers>
+            <TodayMarker date={new Date()} interval={twoSeconds} />
+          </TimelineMarkers>
+          <TimelineHeaders className="sticky border-0  ">
+            <SidebarHeader>
+              {({ getRootProps }) => {
+                return (
+                  <div
+                    {...getRootProps()}
+                    className="font-medium text-sm bg-pink-filter/90 text-pink-filter-text  flex justify-center items-center"
+                  >
+                    Filter
+                  </div>
+                );
+              }}
+            </SidebarHeader>
+            <SidebarHeader variant="right" headerData={{ someData: 'Filter' }}>
+              {({ getRootProps, data }) => {
+                return (
+                  <div
+                    {...getRootProps()}
+                    className="font-medium text-sm bg-pink-filter/90 text-pink-filter-text  flex justify-center items-center"
+                  >
+                    Right {data.someData}
+                  </div>
+                );
+              }}
+            </SidebarHeader>
+            <DateHeader
+              unit="primaryHeader"
+              style={{ backgroundColor: '#fdf2f8', color: '#db2777' }}
+            />
+
+            <DateHeader />
+          </TimelineHeaders>
+        </Timeline>
       </section>
     </div>
   );
