@@ -10,22 +10,9 @@
 
 @font-face {
 	font-family: "Comfortaa";
-	font-weight: 400;
-	src: local("Comfortaa") url('@src/../../public/font/Comfortaa-Regular.ttf')
-
+	src: url('@src/../../public/fonts/Comfortaa-Regular.ttf')
 }
-@font-face {
-	font-family: "ComfortaaBold";
-	font-weight: 700;
-	src: local("ComfortaaBold") url("@src/../../public/font/Comfortaa-Bold.ttf")
 
-}
-@font-face {
-	font-family: "ComfortaaLight";
-	font-weight: 300;
-	src: local("ComfortaaLight") url("@src/../../public/font/Comfortaa-Light.ttf")
-
-}
 
 body {
   margin: 0;
@@ -34,6 +21,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #515151;
+  color: #334155;
 }
 
+.react-calendar-timeline .rct-dateHeader-primary {
+color:#db2777 !important;
+  border-right:none !important;
+}
+.rct-calendar-header{
+  border:none !important;
+
+}
